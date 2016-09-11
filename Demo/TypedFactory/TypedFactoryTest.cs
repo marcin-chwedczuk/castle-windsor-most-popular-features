@@ -9,13 +9,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo.Autofactory
+namespace Demo.TypedFactory
 {
     [TestFixture]
     public class TypedFactoryTest
     {
         [Test]
-        public void autofactory_works()
+        public void typedfactory_case1_works()
+        {
+            EventTracer.ResetEvents();
+
+            using (WindsorContainer container = new WindsorContainer())
+            {
+                // registration
+                container.AddFacility<TypedFactoryFacility>();
+
+                container.Register(
+                    Component.For<ICommandHandler<AddUserCommand>>()
+                        .ImplementedBy<AddUserCommandHandler>()
+                        .LifeStyle.Transient,
+
+                    Component.For<ICommandHandlerFactory>()
+                        .AsFactory()
+                    );
+
+                // usage
+                ICommandHandlerFactory factory = container.Resolve<ICommandHandlerFactory>();
+
+                ICommandHandler<AddUserCommand> handler =
+                    factory.Create<AddUserCommand>();
+
+                handler.Handle(new AddUserCommand());
+
+                factory.Release(handler);
+
+                // check that everything works
+                Assert.That(EventTracer.EventCount, Is.EqualTo(2));
+                Assert.That(EventTracer.GetEvent(0), Is.EqualTo("USER ADDED"));
+                Assert.That(EventTracer.GetEvent(1), Is.EqualTo("HANDLER DISPOSED"));
+            }
+        }
+
+        [Test]
+        public void typedfactory_case2_works()
         {
             EventTracer.ResetEvents();
 

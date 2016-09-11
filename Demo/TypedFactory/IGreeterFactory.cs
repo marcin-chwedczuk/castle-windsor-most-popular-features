@@ -1,4 +1,4 @@
-﻿using Demo.Autofactory;
+﻿using Demo.TypedFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;

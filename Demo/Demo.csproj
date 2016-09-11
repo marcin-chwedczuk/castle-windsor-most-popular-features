@@ -80,6 +80,10 @@
     <Compile Include="RegisterByConvention\ConventionTest.cs" />
     <Compile Include="RegisterByConvention\FooRepository.cs" />
     <Compile Include="RegisterByConvention\IRepository.cs" />
+    <Compile Include="TypedFactory\AddUserCommand.cs" />
+    <Compile Include="TypedFactory\AddUserCommandHandler.cs" />
+    <Compile Include="TypedFactory\ICommandHandler.cs" />
+    <Compile Include="TypedFactory\ICommandHandlerFactory.cs" />
     <Compile Include="TypedFactory\IGreeterFactory.cs" />
     <Compile Include="TypedFactory\TypedFactoryTest.cs" />
     <Compile Include="TypedFactory\ConsoleGreeter.cs" />

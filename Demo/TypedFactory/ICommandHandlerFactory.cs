@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Demo.TypedFactory
 {
-    public interface IGreeter
+    public interface ICommandHandlerFactory
     {
-        void Greet();
+        ICommandHandler<T> Create<T>();
+        void Release<T>(ICommandHandler<T> instance);
     }
 }
