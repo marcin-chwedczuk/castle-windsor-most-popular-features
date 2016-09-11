@@ -1,0 +1,21 @@
+﻿using Castle.Core;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Demo.Interceptors
+{
+    [Interceptor(typeof(EventTracingInterceptor))]
+    public class Service : IService
+    {
+        public void Foo() {
+            EventTracer.AddEvent("FOO CALLED");
+        }
+
+        public void Bar() {
+            EventTracer.AddEvent("BAR CALLED");
+        }
+    }
+}
